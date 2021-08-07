@@ -1,0 +1,46 @@
+.championListFlex{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.championBox{
+    display: flex;
+    flex-flow: column;
+    margin: 10px;
+    border: 2px solid black;
+    width: 20%;
+}
+
+.championBox .championTraits{
+    display: flex;
+    margin: 0;
+    justify-content: space-around;
+}
+.cost1{
+    border: 3px solid gray;
+}
+
+.cost2{
+    border: 3px solid green;
+}
+
+.cost3{
+    border: 3px solid blue;
+    
+}
+
+.cost4{
+    border: 3px solid purple;
+    
+}
+
+.cost5{
+    border: 3px solid gold;
+
+}
+
+.championCardTitle{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
