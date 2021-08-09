@@ -1,25 +1,42 @@
 class RouletteController{
     constructor()
     {
-        this.btnFetchApi = document.querySelectorAll('.btn-request');
+        this.btnFetchAll = document.querySelector('.btn-requestAll');
+        this.btnRequestByCost = document.querySelectorAll('.btn-requestByCost');
+        this.btnRequestByPlayerLevel = document.querySelectorAll('.btn-requestByPlayerLevel');
         this.championList = document.querySelector('.championListFlex');
         this.createEvents();
     }
 
     createEvents()
     {
-        this.btnFetchApi.forEach((element, index, array) =>{
-            element.addEventListener('click', () =>{
-                fetch(`http://localhost:3000/${element.id}`).then(res =>
-                {
-                    res.json().then((allChampions) => 
-                    {
-                        this.makeList(allChampions);
-                    });
-                })
-            })
+        this.btnFetchAll.addEventListener('click', () =>
+        {
+            this.getChampionList();
+        });
 
-        }); 
+        this.btnRequestByCost.forEach((element) =>{
+            element.addEventListener('click', () =>{
+                this.getChampionList(`cost/${element.id}`);
+            });
+        });
+
+        this.btnRequestByPlayerLevel.forEach((element) =>{
+            element.addEventListener('click', () =>{
+                this.getChampionList(`level/${element.id}`);
+            });
+        });
+    }
+
+    getChampionList(searchParams = "")
+    {
+        let path = `http://localhost:3000/champions/${searchParams}`;
+
+        fetch(path).then(res =>{
+            res.json().then((championList) =>{
+                this.makeList(championList);
+            });
+        });
     }
 
     makeList(championArray)
@@ -39,15 +56,19 @@ class RouletteController{
             const lblClass = document.createElement('label');
             const lblClass2 = document.createElement('label');
             const lblCost = document.createElement('label');
+            const lblChampionPool = document.createElement('label');
             
             lblNome.textContent = element.championName;
             lblOrigin.textContent = element.championOrigin;
             lblClass.textContent = element.championClass;
             lblCost.textContent = `Cost: ${element.championCost}`;
+            lblChampionPool.textContent = `Pool: ${element.championPool}`;
+
 
             championCardTitle.appendChild(lblNome);
             championCardTitle.appendChild(lblCost);
-
+            championCardTitle.appendChild(lblChampionPool);
+            
 
             championTraitsDiv.appendChild(lblOrigin);
             championTraitsDiv.appendChild(lblClass);
