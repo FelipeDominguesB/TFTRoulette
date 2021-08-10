@@ -400,16 +400,16 @@ class champions{
         this.championList.forEach((element) => {
             switch (element.championCost) {
                 case 1:
-                    element.championPool = 39;
+                    element.championPool = 29;
                     break;
                 case 2:
-                    element.championPool = 26;
+                    element.championPool = 22;
                     break;
                 case 3:
-                    element.championPool = 21;
+                    element.championPool = 18;
                     break;
                 case 4:
-                    element.championPool = 13;
+                    element.championPool = 12;
                     break;
                 case 5:
                     element.championPool = 10;
@@ -418,14 +418,25 @@ class champions{
         });
     }
 
-    getChampionByCost(championCost)
+    getChampionByCost(championCost, championList = this.championList)
     {
-        return this.championList.filter((champion) =>{
+        return championList.filter((champion) =>{
             return champion.championCost == championCost;
         });
     }
 
-    getChampionsByLevel(playerLevel, hasPool)
+
+
+    replaceChampion(championName)
+    {
+        let index = this.championList.findIndex((element) =>{
+            return element.championName == championName;
+        });
+
+        this.championList[index].championPool++;
+    }
+
+    getChampionsByLevel(playerLevel, needsPool=false)
     {
         let filteredByLevel = [];
         
@@ -464,7 +475,101 @@ class champions{
             });
         }
 
+        if(needsPool)
+        {
+            filteredByLevel.forEach((element, index) =>{
+                if(element.championPool == 0) filteredByLevel.slice(index);
+            });
+        }
+        
         return filteredByLevel;
+    }
+    
+    getProbabilites()
+    {
+
+        const rouletteProbabilities = [
+            { cost: [100, 0, 0, 0, 0]      },
+            { cost: [ 100,  0,  0,  0, 0]  },
+            { cost: [ 75,  25,  0,  0, 0]  },
+            { cost: [ 55,  30,  15,  0, 0] },
+            { cost: [ 45,  33,  20,  2, 0] },
+            { cost: [ 25,  40,  30,  5, 0] },
+            { cost: [ 19,  30,  35,  15, 1]},
+            { cost: [ 15,  20,  35,  25, 5]},
+            { cost: [ 10,  15,  30,  30, 15]},
+        ];
+        return rouletteProbabilities;
+    }
+    getRandomChampion(playerLevel)
+    {
+        let counter = 0;
+        let rouletteProbabilities = this.getProbabilites();
+        let levelProbabilities = rouletteProbabilities[playerLevel-1];
+        let rouletteChampions = [];
+        let filteredArray = this.getChampionsByLevel(playerLevel, true);
+        let randonMumber = Math.floor(Math.random() * (100 - 1));
+        let starterValue = 0;
+        let MinMax;
+
+        while(levelProbabilities.cost[counter] != 0 && levelProbabilities.cost[counter])
+        {       
+            MinMax = [starterValue, starterValue + levelProbabilities.cost[counter]];
+            if(randonMumber > MinMax[0] && randonMumber <= MinMax[1])
+            {
+                counter++;
+                break;
+            }
+            starterValue += levelProbabilities.cost[counter];
+            counter++;
+        }
+
+        let totalChampionPool = 0;
+
+        let newFilteredarray = [];
+        filteredArray.forEach(element =>{
+            if(element.championCost == counter)
+            {
+                newFilteredarray.push(element);
+                totalChampionPool += element.championPool;
+            }
+        });
+        
+        starterValue = 0, counter=0;
+        randonMumber = Math.floor(Math.random() * (totalChampionPool - 1));
+        let newChampionPool = 0;
+        while(newFilteredarray[counter])
+        {
+            newChampionPool = starterValue + newFilteredarray[counter].championPool;
+            MinMax = [starterValue, newChampionPool];
+
+            if(randonMumber> MinMax[0] && randonMumber <= MinMax[1])
+            {
+                rouletteChampions = newFilteredarray[counter];
+                rouletteChampions.championPool--;
+                
+                break;
+            }
+
+            starterValue = newChampionPool;
+            counter++;
+
+        }
+
+        return rouletteChampions;
+
+    }
+
+    getPlayerRoulette(playerLevel)
+    {
+        let counter = 0, championArray = [];
+        while(counter < 5)
+        {
+            championArray.push(this.getRandomChampion(playerLevel));
+            counter++;
+        }
+
+        return championArray;
     }
 }
 

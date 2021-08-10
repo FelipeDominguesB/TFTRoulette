@@ -1,7 +1,8 @@
 class RouletteController{
     constructor()
     {
-        this.btnFetchAll = document.querySelector('.btn-requestAll');
+        this.championArray = [];
+        this.lastSearch = "";
         this.btnRequestByCost = document.querySelectorAll('.btn-requestByCost');
         this.btnRequestByPlayerLevel = document.querySelectorAll('.btn-requestByPlayerLevel');
         this.championList = document.querySelector('.championListFlex');
@@ -10,11 +11,7 @@ class RouletteController{
 
     createEvents()
     {
-        this.btnFetchAll.addEventListener('click', () =>
-        {
-            this.getChampionList();
-        });
-
+       
         this.btnRequestByCost.forEach((element) =>{
             element.addEventListener('click', () =>{
                 this.getChampionList(`cost/${element.id}`);
@@ -23,25 +20,49 @@ class RouletteController{
 
         this.btnRequestByPlayerLevel.forEach((element) =>{
             element.addEventListener('click', () =>{
-                this.getChampionList(`level/${element.id}`);
+                this.getChampionList(`level/${element.id}/roulette`);
             });
         });
     }
 
     getChampionList(searchParams = "")
     {
+
+        if(this.championArray.length > 0 && this.lastSearch.includes('level')) this.reroll();
+        
         let path = `http://localhost:3000/champions/${searchParams}`;
 
         fetch(path).then(res =>{
             res.json().then((championList) =>{
-                this.makeList(championList);
+                this.lastSearch = searchParams;
+                this.championArray = championList;
+                this.makeList(this.championArray);
             });
         });
+    }
+
+    buyChampion(championName)
+    {
+        let result = this.championArray.findIndex((element) =>{
+            return element.championName == championName;
+        });
+        this.championArray.splice(result, 1);
+        this.makeList(this.championArray);
+    }
+
+    reroll()
+    {
+        this.championArray.forEach(element =>{
+            fetch(`http://localhost:3000/champions/${element.championName}/roulette`, {method: 'POST'}).then(res =>{     
+            });
+        });
+        
     }
 
     makeList(championArray)
     {
         this.championList.innerHTML = '';
+       
         championArray.forEach((element) =>{
             const mainDiv = document.createElement('div');
             const championCardTitle = document.createElement('div');
@@ -56,19 +77,17 @@ class RouletteController{
             const lblClass = document.createElement('label');
             const lblClass2 = document.createElement('label');
             const lblCost = document.createElement('label');
-            const lblChampionPool = document.createElement('label');
+            const lblPool = document.createElement('label');
             
             lblNome.textContent = element.championName;
             lblOrigin.textContent = element.championOrigin;
             lblClass.textContent = element.championClass;
             lblCost.textContent = `Cost: ${element.championCost}`;
-            lblChampionPool.textContent = `Pool: ${element.championPool}`;
-
+            lblPool.textContent = `Pool: ${element.championPool}`;
 
             championCardTitle.appendChild(lblNome);
-            championCardTitle.appendChild(lblCost);
-            championCardTitle.appendChild(lblChampionPool);
-            
+            championCardTitle.appendChild(lblCost);            
+            championCardTitle.appendChild(lblPool);            
 
             championTraitsDiv.appendChild(lblOrigin);
             championTraitsDiv.appendChild(lblClass);
@@ -78,6 +97,11 @@ class RouletteController{
                 lblClass2.textContent = element.championClass2;
                 championTraitsDiv.appendChild(lblClass2);
             }
+
+            mainDiv.addEventListener('click', (event) =>{
+                event.preventDefault();
+                this.buyChampion(element.championName);
+            }, false);
 
             mainDiv.appendChild(championCardTitle)
             mainDiv.appendChild(championTraitsDiv);

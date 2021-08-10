@@ -11,6 +11,11 @@ app.get('/champions', (req, res)=>{
     res.json(champions.championList);
 });
 
+app.get('/champions/level/:playerLevel/roulette', (req, res)=>{
+    let playerLevel = req.params.playerLevel.replace(/\D/g, "");
+    res.json(champions.getPlayerRoulette(playerLevel));
+});
+
 app.get('/champions/level/:playerLevel', (req, res) =>{
 
     let playerLevel = req.params.playerLevel.replace(/\D/g, "");  
@@ -24,18 +29,11 @@ app.get('/champions/cost/:championCost', (req, res) =>{
     res.json(champions.getChampionByCost(championCost));
 });
 
-
-app.post('/:championName', (req, res) =>{
-
-    champions.championList.find((element) =>{
-        if(element.championName == req.params.championName)
-        {
-            element.championPool--;
-        }    
-    });
-    res.json(championList);
+app.post('/champions/:championName/roulette', (req, res) =>{
+    champions.replaceChampion(req.params.championName);
+    res.json({message: 'Funcionou'})
 });
 
 app.listen(port, () => {
-    console.log(`Ouvindo na porta http://localhost:${port}`)
+    console.log(`Ouvindo na porta http://localhost:${port}`);
 });

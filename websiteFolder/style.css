@@ -29,6 +29,10 @@
     width: 20%;
 }
 
+
+.championBox:hover{
+    cursor: pointer;
+}
 .championBox .championTraits{
     display: flex;
     margin: 0;
