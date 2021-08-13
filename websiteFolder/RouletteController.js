@@ -65,6 +65,8 @@ class RouletteController{
        
         championArray.forEach((element) =>{
             const mainDiv = document.createElement('div');
+
+            
             const championCardTitle = document.createElement('div');
             const championTraitsDiv = document.createElement('div');
 
@@ -72,22 +74,22 @@ class RouletteController{
             championTraitsDiv.className = `championTraits cost${element.championCost}`;
             championCardTitle.className = `championCardTitle cost${element.championCost}`
 
+            mainDiv.style.backgroundImage = `url(./imagens/${element.championName.replace(/ /g, '')}.jpg)`;
+            mainDiv.style.backgroundSize = "100% 100%";
+
             const lblNome = document.createElement('label');
             const lblOrigin = document.createElement('label');
             const lblClass = document.createElement('label');
             const lblClass2 = document.createElement('label');
             const lblCost = document.createElement('label');
-            const lblPool = document.createElement('label');
             
             lblNome.textContent = element.championName;
             lblOrigin.textContent = element.championOrigin;
             lblClass.textContent = element.championClass;
             lblCost.textContent = `Cost: ${element.championCost}`;
-            lblPool.textContent = `Pool: ${element.championPool}`;
 
             championCardTitle.appendChild(lblNome);
             championCardTitle.appendChild(lblCost);            
-            championCardTitle.appendChild(lblPool);            
 
             championTraitsDiv.appendChild(lblOrigin);
             championTraitsDiv.appendChild(lblClass);

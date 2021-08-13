@@ -1,6 +1,8 @@
 .body{
     display: flex;
     flex-flow: column;
+
+      
 }
 
 .buttonDisplayFlex
@@ -22,47 +24,67 @@
 }
 
 .championBox{
+    
     display: flex;
     flex-flow: column;
     margin: 10px;
     border: 2px solid black;
-    width: 20%;
+    width: 240px;
+    height: 135px;
+
+    
+
+
+    color: white;
+    text-shadow: 0 0 8px black;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
 
 .championBox:hover{
     cursor: pointer;
 }
-.championBox .championTraits{
+.championTraits{
     display: flex;
+    height: 80%;
     margin: 0;
     justify-content: space-around;
-}
-.cost1{
-    border: 3px solid gray;
-}
-
-.cost2{
-    border: 3px solid green;
-}
-
-.cost3{
-    border: 3px solid blue;
-    
-}
-
-.cost4{
-    border: 3px solid purple;
-    
-}
-
-.cost5{
-    border: 3px solid gold;
-
+    cursor: inherit;
 }
 
 .championCardTitle{
     display: flex;
     flex-flow: row;
     justify-content: space-around;
+    cursor: pointer;
+    height: 20%;
 }
+
+.championCardTitle:hover{
+    cursor: pointer;
+}
+
+.championTraits:hover{
+    cursor: pointer;
+}
+.cost1{
+    border: 3px solid rgba(10, 10, 10, 0.4);   
+}
+.cost2{
+    border: 3px solid rgba(43, 255, 0, 0.4);
+}
+
+.cost3{
+    border: 3px solid rgba(0, 17, 253, 0.4);
+    
+}
+
+.cost4{
+    border: 3px solid rgba(206, 3, 206, 0.4);
+    
+}
+
+.cost5{
+    border: 3px solid rgba(255, 255, 1, 0.4);
+}
+

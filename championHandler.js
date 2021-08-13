@@ -290,7 +290,7 @@ class champions{
                 championClass: classes.Legionnaire,
             },
             {
-                championName: 'Fiddlestick',
+                championName: 'Fiddlesticks',
                 championCost: 4,
                 championOrigin: origins.Abomination,
                 championClass: origins.Revenant,
@@ -543,7 +543,7 @@ class champions{
             newChampionPool = starterValue + newFilteredarray[counter].championPool;
             MinMax = [starterValue, newChampionPool];
 
-            if(randonMumber> MinMax[0] && randonMumber <= MinMax[1])
+            if(randonMumber>= MinMax[0] && randonMumber <= MinMax[1])
             {
                 rouletteChampions = newFilteredarray[counter];
                 rouletteChampions.championPool--;
