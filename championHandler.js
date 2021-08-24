@@ -418,8 +418,12 @@ class champions{
         });
     }
 
-    getChampionByCost(championCost, championList = this.championList)
+    getChampionByCost(championCost, callBackFunc, championList = this.championList)
     {
+        if(championCost > 5 || championCost < 1)
+        {
+            throw callBackFunc("Custo informado fora do limite de 1 a 5.");
+        }
         return championList.filter((champion) =>{
             return champion.championCost == championCost;
         });
@@ -427,17 +431,24 @@ class champions{
 
 
 
-    replaceChampion(championName)
+    replaceChampion(championName, callBackFunc)
     {
-        let index = this.championList.findIndex((element) =>{
-            return element.championName == championName;
-        });
 
-        this.championList[index].championPool++;
+        if(!this.championList.some(element =>{
+            if(element.championName == championName)
+            {
+                element.championPool++;
+                return element.championName == championName;
+            }
+        })){
+            throw callBackFunc("Campeão não existente.");
+        }
     }
 
-    getChampionsByLevel(playerLevel, needsPool=false)
+    getChampionsByLevel(playerLevel, callBackFunc, needsPool=false)
     {
+
+        if(playerLevel > 9 || playerLevel < 1) throw callBackFunc("Nível informado fora do limite de 1 a 9.");
         let filteredByLevel = [];
         
         if(playerLevel >= 1)
@@ -501,13 +512,13 @@ class champions{
         ];
         return rouletteProbabilities;
     }
-    getRandomChampion(playerLevel)
+    getRandomChampion(playerLevel, callBackFunc)
     {
         let counter = 0;
         let rouletteProbabilities = this.getProbabilites();
         let levelProbabilities = rouletteProbabilities[playerLevel-1];
         let rouletteChampions = [];
-        let filteredArray = this.getChampionsByLevel(playerLevel, true);
+        let filteredArray = this.getChampionsByLevel(playerLevel, callBackFunc, true);
         let randonMumber = Math.floor(Math.random() * (100 - 1));
         let starterValue = 0;
         let MinMax;
@@ -560,12 +571,12 @@ class champions{
 
     }
 
-    getPlayerRoulette(playerLevel)
+    getPlayerRoulette(playerLevel, callBackFunc)
     {
         let counter = 0, championArray = [];
         while(counter < 5)
         {
-            championArray.push(this.getRandomChampion(playerLevel));
+            championArray.push(this.getRandomChampion(playerLevel, callBackFunc));
             counter++;
         }
 

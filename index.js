@@ -1,37 +1,22 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const cors = require('cors');
 const port = 3000;
-const champions = require('./championHandler.js');
+
 
 
 app.use(cors());
+app.use(express.static('views'));
+app.use('/champions',require('./rotas/championRoutes'))
 
-app.get('/champions', (req, res)=>{
-    res.json(champions.championList);
+app.get('/', (req, res)=>{
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/champions/level/:playerLevel/roulette', (req, res)=>{
-    let playerLevel = req.params.playerLevel.replace(/\D/g, "");
-    res.json(champions.getPlayerRoulette(playerLevel));
-});
-
-app.get('/champions/level/:playerLevel', (req, res) =>{
-
-    let playerLevel = req.params.playerLevel.replace(/\D/g, "");  
-    res.json(champions.getChampionsByLevel(playerLevel));
-});
-
-
-app.get('/champions/cost/:championCost', (req, res) =>{
-
-    let championCost = req.params.championCost.replace(/\D/g, "");
-    res.json(champions.getChampionByCost(championCost));
-});
-
-app.post('/champions/:championName/roulette', (req, res) =>{
-    champions.replaceChampion(req.params.championName);
-    res.json({message: 'Funcionou'})
+app.use((error, req, res, next) =>{
+    console.error(error);
+    res.status(500).send("Deu erro!");
 });
 
 app.listen(port, () => {
