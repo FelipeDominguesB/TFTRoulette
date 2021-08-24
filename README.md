@@ -5,7 +5,8 @@ Uma API que clona o jogo TFT, desenvolvida utilizando conhecimentos em NodeJs e 
 
 1. Estudar programação com probabilidade
 
-Reproduzir um jogo que sou familiarizado me pareceu a maneira mais prática de entender como lidar com probabilidades voláteis e escassez de elementos em um jogo. De acordo com cada nível do jogador os campeões que podem aparecer e qual a porcetagem atríbuida pra cada um muda, o código está escrito para lidar com isso de maneira dinâmica e facilmente modificável.
+Reproduzir um jogo que sou familiarizado me pareceu a maneira mais prática de entender como lidar com probabilidades voláteis e escassez de elementos em um jogo. De acordo com cada nível do jogador os campeões que podem aparecer e qual a porcetagem atríbuida pra cada um muda, o código está escrito para lidar com isso de maneira dinâmica e facilmente modificável.  
+
 
 2. Estudar a criação de API's para a Web
 
@@ -13,7 +14,8 @@ Toda a manipulação de campeões é feita através de uma API para a web, ou se
 
 
 ## Como ter acesso ao conteúdo da API
-Para rodar a API, você deve instalar as dependências do projeto através do seguinte comando na raíz do projeto:
+Para rodar a API, você deve instalar as dependências do projeto através do seguinte comando na raíz do projeto:  
+
 `npm install`
 Após o término da instalação das dependências, você deve rodar o seguinte código na raiz do projeto:
 `node index.js`
