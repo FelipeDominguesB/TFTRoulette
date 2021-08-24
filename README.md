@@ -15,19 +15,19 @@ Toda a manipulação de campeões é feita através de uma API para a web, ou se
 
 ## Como ter acesso ao conteúdo da API
 Para rodar a API, você deve instalar as dependências do projeto através do seguinte comando na raíz do projeto:  
-
-`npm install`
-Após o término da instalação das dependências, você deve rodar o seguinte código na raiz do projeto:
-`node index.js`
-Tendo feito isso, a API estará acessível no endereço http://localhost:3000 
+`npm install`   
+Após o término da instalação das dependências, você deve rodar o seguinte código na raiz do projeto:       
+`node index.js`        
+Tendo feito isso, a API estará acessível no endereço: http://localhost:3000 
 
 
 ## As rotas da API
 
-```GET: /champions```: Retorna todos os campeões.
-```GET: /champions/level/:playerLevel```: Retorna todos os possíveis campeões de acordo com o nível informado.
-```GET: /champions/level/:playerLevel/roulette```: Retorna um campeão aleatório de acordo com o nível informado, cada campeão retirado através dessa rota sofre redução na disponibilidade total. Ou seja, se um campeão possuir disponibilidade de 36, cada vez que ele for invocado pela API será reduzido 1 de sua disponibilidade. Essa rota não retorna campeões que não tenham disponibilidade.
-```GET: /champions/cost/:championCost```: Retorna todos os campeões até determinado custo
-```POST: /champions/:championName/roulette```: Adiciona para a disponibilidade de um campeão na roleta.
+```GET: /champions```: Retorna todos os campeões.  
+```GET: /champions/level/:playerLevel```: Retorna todos os possíveis campeões de acordo com o nível informado.  
+```GET: /champions/level/:playerLevel/roulette```: Retorna um campeão aleatório de acordo com o nível informado, cada campeão retirado através dessa rota sofre redução na disponibilidade total. Ou seja, se um campeão possuir disponibilidade de 36, cada vez que ele for invocado pela API será reduzido 1 de sua disponibilidade. Essa rota não retorna campeões que não tenham disponibilidade.  
+```GET: /champions/cost/:championCost```: Retorna todos os campeões até determinado custo  
+```POST: /champions/:championName/roulette```: Adiciona para a disponibilidade de um campeão na roleta.     
+
 
 
