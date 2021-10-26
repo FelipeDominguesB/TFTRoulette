@@ -1,0 +1,11 @@
+body{
+
+    background-image: url('./imagens/wallpaper.jpg');
+    background-position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;    
+}

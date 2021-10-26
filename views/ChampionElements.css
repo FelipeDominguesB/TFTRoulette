@@ -1,10 +1,3 @@
-.body{
-    display: flex;
-    flex-flow: column;
-
-      
-}
-
 .buttonDisplayFlex
 {
     height: 20%;
@@ -84,32 +77,17 @@
     height: 100%;
 }
 
-.TextoUm{
+.TextoUm, .TextoDois, .TextoTres{
     display: flex;
     position: absolute;
     left: 0%;
-    top: 60%;
-    
 }
 
-.TextoUm img{
-    
+
+.TextoUm, .TextoDois, .TextoTres img{
+   width: 20px;
    height: 20px;
 }
-
-
-.TextoDois{
-    position: absolute;
-    display: flex;
-    left: 0%;
-    top: 80%;
-}
-
-.TextoDois img{
-    
-    height: 20px;
- }
- 
 
 .cost1{
     background-image: linear-gradient(135deg, #142431, #252F38); 
