@@ -23,68 +23,112 @@
     flex-flow: row wrap;
 }
 
-.championBox{
-    
+
+
+.championListFlex >  * :hover{
+    cursor: pointer;
+}
+
+
+.altChampionBox{
     display: flex;
-    flex-flow: column;
-    margin: 10px;
+    flex-direction: column;
+    width: 210px;
+    height: 140px;
     border: 2px solid black;
-    width: 240px;
-    height: 135px;
+    justify-content: flex-start;
+    align-content: flex-start;
+    padding: 1px 4px 2px 2px;
+    margin: 10px;
+    color: white;    
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 0 0 4px black;
+}
 
+.altChampionPhoto{
     
-
-
-    color: white;
-    text-shadow: 0 0 8px black;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
-}
-
-
-.championBox:hover{
-    cursor: pointer;
-}
-.championTraits{
     display: flex;
+    position: relative;
+    width: 100%;
     height: 80%;
+    border: 1px solid black;
+}
+.altChampionPhoto label{
+    
     margin: 0;
-    justify-content: space-around;
-    cursor: inherit;
+    
 }
 
-.championCardTitle{
+.altChampionPhoto img{
+    
+    width: 100%;
+    position: static;
+ 
+}
+
+
+
+.altChampionText{
+    
     display: flex;
-    flex-flow: row;
-    justify-content: space-around;
-    cursor: pointer;
+    flex-direction: row;
+    width: 100%;
     height: 20%;
+    align-content: center;
+    padding: 0 0 0 2px;
 }
 
-.championCardTitle:hover{
-    cursor: pointer;
+.altChampionText *{
+    margin: 4px 2px 0 2px;
+    width: 50%;
+    height: 100%;
 }
 
-.championTraits:hover{
-    cursor: pointer;
+.TextoUm{
+    display: flex;
+    position: absolute;
+    left: 0%;
+    top: 60%;
+    
 }
+
+.TextoUm img{
+    
+   height: 20px;
+}
+
+
+.TextoDois{
+    position: absolute;
+    display: flex;
+    left: 0%;
+    top: 80%;
+}
+
+.TextoDois img{
+    
+    height: 20px;
+ }
+ 
+
 .cost1{
-    border: 3px solid rgba(10, 10, 10, 0.4);   
+    background-image: linear-gradient(135deg, #142431, #252F38); 
 }
 .cost2{
-    border: 3px solid rgba(43, 255, 0, 0.4);
+    background-image: linear-gradient(135deg, #14352C, #0F562A); 
 }
 
 .cost3{
-    border: 3px solid rgba(0, 17, 253, 0.4);
+    background-image: linear-gradient(135deg, #1C1F48, #1C537C); 
     
 }
 
 .cost4{
-    border: 3px solid rgba(206, 3, 206, 0.4);
     
+    background-image: linear-gradient(135deg, #490D49, #AE047C);
 }
 
 .cost5{
-    border: 3px solid rgba(255, 255, 1, 0.4);
+    background-image: linear-gradient(135deg, #512B04, #9E6B10);
 }
 

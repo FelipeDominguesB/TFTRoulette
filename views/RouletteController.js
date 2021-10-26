@@ -65,48 +65,65 @@ class RouletteController{
        
         championArray.forEach((element) =>{
             const mainDiv = document.createElement('div');
+            const championPhotoDiv = document.createElement('div');
+            const championText = document.createElement('div');
+            const textoUm = document.createElement('div');
+            const textoDois = document.createElement('div');
 
-            
-            const championCardTitle = document.createElement('div');
-            const championTraitsDiv = document.createElement('div');
 
-            mainDiv.className = `championBox cost${element.championCost}`;
-            championTraitsDiv.className = `championTraits cost${element.championCost}`;
-            championCardTitle.className = `championCardTitle cost${element.championCost}`
+            const backgroundImage = document.createElement('img');
+            const iconImage = document.createElement('img');
+            const iconImage2 = document.createElement('img');
 
-            mainDiv.style.backgroundImage = `url(./imagens/${element.championName.replace(/ /g, '')}.jpg)`;
-            mainDiv.style.backgroundSize = "100% 100%";
-
-            const lblNome = document.createElement('label');
             const lblOrigin = document.createElement('label');
             const lblClass = document.createElement('label');
             const lblClass2 = document.createElement('label');
+            const lblNome = document.createElement('label');
             const lblCost = document.createElement('label');
+
+            mainDiv.className = `altChampionBox cost${element.championCost}`;
+            championPhotoDiv.className = `altChampionPhoto`;
+            championText.className = `altChampionText`;
+            textoUm.className = `TextoUm`;
+            textoDois.className = `TextoDois`;
+
+            /*
+            mainDiv.style.backgroundImage = `url(./imagens/${element.championName.replace(/ /g, '')}.jpg)`;
+            mainDiv.style.backgroundSize = "100% 100%";
+            */
+
+            backgroundImage.src = `./imagens/${element.championName.replace(/ /g, '')}.jpg`;
+            iconImage.src = `./imagens/icon.png`;
+            iconImage2.src = `./imagens/icon.png`;
             
             lblNome.textContent = element.championName;
             lblOrigin.textContent = element.championOrigin;
             lblClass.textContent = element.championClass;
-            lblCost.textContent = `Cost: ${element.championCost}`;
+            lblCost.textContent = element.championCost;
 
-            championCardTitle.appendChild(lblNome);
-            championCardTitle.appendChild(lblCost);            
-
-            championTraitsDiv.appendChild(lblOrigin);
-            championTraitsDiv.appendChild(lblClass);
+            lblCost.style.textAlign = 'end';
             
-            if(element.championClass2) 
-            {
-                lblClass2.textContent = element.championClass2;
-                championTraitsDiv.appendChild(lblClass2);
-            }
+            
+
 
             mainDiv.addEventListener('click', (event) =>{
                 event.preventDefault();
                 this.buyChampion(element.championName);
             }, false);
 
-            mainDiv.appendChild(championCardTitle)
-            mainDiv.appendChild(championTraitsDiv);
+            mainDiv.appendChild(championPhotoDiv);
+                championPhotoDiv.appendChild(backgroundImage);
+                championPhotoDiv.appendChild(textoUm);
+                    textoUm.appendChild(iconImage);
+                    textoUm.appendChild(lblOrigin);
+                championPhotoDiv.appendChild(textoDois);
+                    textoDois.appendChild(iconImage2);
+                    textoDois.appendChild(lblClass);
+
+            mainDiv.appendChild(championText);
+                championText.appendChild(lblNome);
+                championText.appendChild(lblCost);
+
             this.championList.appendChild(mainDiv);
         });
     }
